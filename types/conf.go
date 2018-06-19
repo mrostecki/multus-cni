@@ -98,9 +98,6 @@ func LoadNetConf(bytes []byte) (*NetConf, error) {
 	}
 	netconf.RawDelegates = nil
 
-	// First delegate is always the master plugin
-	netconf.Delegates[0].MasterPlugin = true
-
 	return netconf, nil
 }
 
@@ -122,5 +119,7 @@ func (d *DelegateNetConf) updateRawConfig() error {
 // AddDelegates appends the new delegates to the delegates list
 func (n *NetConf) AddDelegates(newDelegates []*DelegateNetConf) error {
 	n.Delegates = append(n.Delegates, newDelegates...)
+	 // First delegate is always the master plugin
+	n.Delegates[0].MasterPlugin = true
 	return nil
 }
